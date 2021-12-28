@@ -15,9 +15,9 @@ struct termios term;
 
 namespace methods{
     char* native_exec(const char command[]);
-    
+
     void prep_string(char xd[]){
-        strcpy(xd + strlen(xd) - 1 , xd + strlen(xd));
+        xd[strlen(xd) - 1] = '\0';
     }
 
     char* user(){
@@ -33,21 +33,15 @@ namespace methods{
         return def_usr;
     }
     
-    void init_usr(char user_name[]){
-        char full_user[1024];
-        full_user[0] = '[';
+    char* init_usr(char user_name[] , char host_name[]){
+        char *t;
+        char full_user[1024]; full_user[0] = '[';
+        
+        strcat(full_user , user_name); strcat(full_user , "@");
+        strcat(full_user , host_name); strcat(full_user , " epx]> ");
 
-        strcpy(full_user + 1 , user_name);
-
-        strcat(full_user , "@");
-
-        char *hostname = native_exec
-            ("cat /proc/sys/kernel/hostname");
-
-        strcat(full_user , " epx]> ");
-
-        strcpy(user_name , full_user);
-
+        strcpy(t , full_user);
+        return t;
     }
     
     namespace echo{
