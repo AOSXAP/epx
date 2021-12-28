@@ -32,13 +32,20 @@ namespace methods{
         fclose(t);    
         return def_usr;
     }
+
+    void prepare_full_user(char full_user[], 
+            char user_name[], char host_name[]
+    ){
+        full_user[0] = '['; 
+
+        strcpy(full_user + 1 , user_name); 
+        strcat(full_user , "@");strcat(full_user , host_name);
+        strcat(full_user , " epx]$ ");
+    }
     
     char* init_usr(char user_name[] , char host_name[]){
-        char *t;
-        char full_user[1024]; full_user[0] = '[';
-        
-        strcat(full_user , user_name); strcat(full_user , "@");
-        strcat(full_user , host_name); strcat(full_user , " epx]> ");
+        char full_user[1024], *t;  
+        prepare_full_user(full_user, user_name , host_name);
 
         strcpy(t , full_user);
         return t;

@@ -11,11 +11,13 @@
 
 int main(int argc, char *argv[])
 {
-    char *user_name = methods::native_exec("whoami"), *t;
-    char *host_name =  methods::native_exec(
-        "cat /proc/sys/kernel/hostname"
-    );
+    char *user_name = methods::user(), *t;
 
+    t = methods::init_usr(user_name ,  methods::native_exec(
+        "cat /proc/sys/kernel/hostname"
+    ));
+
+    std::cout<<t;
 
     /*
     while(t = methods::read_line()){
