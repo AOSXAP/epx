@@ -1,0 +1,1 @@
+g++ -w core.cpp methods.h -o core && ./core
