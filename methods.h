@@ -66,6 +66,7 @@ namespace methods{
     }
     
     char* read_line(){
+        //dynamic getline
         int p = 0, buffer_size = 1024;
         char *buffer = (char *)malloc(sizeof(char) * buffer_size), c ;
         

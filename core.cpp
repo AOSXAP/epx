@@ -11,18 +11,17 @@
 
 int main(int argc, char *argv[])
 {
-    char *user_name = methods::user(), *t;
+    char *user_name = methods::user(), *shellx, *t;
 
-    t = methods::init_usr(user_name ,  methods::native_exec(
+    shellx = methods::init_usr(user_name ,  methods::native_exec(
         "cat /proc/sys/kernel/hostname"
     ));
 
-    std::cout<<t;
+    std::cout<<shellx;
 
-    /*
+    
     while(t = methods::read_line()){
-        char t_arr[1024]; std::cout<<usr;
-        std::cout<<"\n"<<methods::native_exec(t)<<"\n";
+        char t_arr[1024]; std::cout<<shellx;
+        std::cout<<"\n"<<t<<"\n";
     }
-    */
 }
