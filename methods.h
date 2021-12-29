@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <cstring>
 #include <termios.h>
@@ -88,20 +90,4 @@ namespace methods{
            p++;
         }
     }  
-
-    char* native_exec(const char command[]){
-        FILE* tf; char output[1024] , *t;
-
-        tf = popen(command , "r");
-
-        if(tf != NULL){
-            fgets(output , 1024 , tf);
-            prep_string(output);
-        }else return "err";
-
-        fclose(tf); 
-
-        strcpy(t, output); 
-        return t;
-    }
 }
