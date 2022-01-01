@@ -11,6 +11,7 @@
 
 int main(int argc, char *argv[])
 {
+    system("clear");
     char *user_name = methods::user(), *shellx, *t;
 
     shellx = methods::init_usr(user_name ,  exec::deprecated_exec(
@@ -27,9 +28,17 @@ int main(int argc, char *argv[])
             std::cout<<"fork";
             perror("fork");
         } 
-        else if (c_pid > 0) wait(nullptr);
+        else if (c_pid > 0){
+            wait(nullptr);
+        }
         else {
-            exec::fork_exec(t); 
+            try{
+                throw(exec::fork_exec(t)); 
+            }
+            catch(int code){
+                std::cerr << "error command not found"<<"\n";
+            }
+
             exit(EXIT_SUCCESS);
         }
     }

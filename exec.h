@@ -47,13 +47,13 @@ namespace exec{
         }
     }
 
-    void fork_exec(char* args){
+    int fork_exec(char* args){
         int i = 0, j; char arg_arr[1000][1000];
         form_arr(arg_arr , args, i);
 
         char* command_name = arg_arr[0], *parr[1000];
         prepare_arr(parr, arg_arr, i, j);
         
-        execvp(command_name, parr);
+        return execvp(command_name, parr);
     }
 }

@@ -9,6 +9,11 @@
 #include <limits.h>
 
 #define infinite 1
+#define END  "\x1B[0m"
+#define RED  "\x1B[31m"
+#define GRN  "\x1B[32m"
+#define BLU  "\x1B[34m"
+
 
 char def_usr[] = "shell> ";
 
@@ -35,13 +40,23 @@ namespace methods{
         return def_usr;
     }
 
+    char* color_names(char name[]){
+        char new_string[150];
+        strcpy(new_string , BLU); strcat(new_string , name);
+        strcat(new_string, END);
+        return new_string;
+    }
+
     void prepare_full_user(char full_user[], 
             char user_name[], char host_name[]
     ){
         full_user[0] = '['; 
+        //char *xd = color_names(user_name) , *yd = color_names(host_name);
+        //strcpy(user_name, xd);
+        //strcpy(host_name , yd);
 
         strcpy(full_user + 1 , user_name); 
-        strcat(full_user , "@");strcat(full_user , host_name);
+        strcat(full_user , "@"); strcat(full_user , host_name);
         strcat(full_user , " epx]$ ");
     }
     
