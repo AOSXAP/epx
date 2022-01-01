@@ -2,21 +2,26 @@
 
 #include <iostream>
 #include <unistd.h>
-
-int main(){
-    char s[100];
-    std::cout<<getcwd(s,100)<<"\n";
-    chdir("../");
-    chdir("files");
-    std::cout<<getcwd(s,100);;
-}
+#include <signal.h>
+#include <stdlib.h>
 
 namespace funcs{
-    void cd(char *xarg){
+    char* path();
+    
+    void cd(char* xarg){
+        std::cout<<path()<<"\n";
         chdir(xarg);
+        std::cout<<path()<<"\n";
     }
 
     char* path(){
-        char s[100]; return getcwd(s,100);
+        char *s = (char *) malloc(150 * sizeof(char)); 
+        getcwd(s,150); return s;
+    }
+
+    void signal_handler(int num_code){
+
+        std::cout<<num_code;
+        std::cout<<"You can stop shell with :q";
     }
 }

@@ -5,10 +5,15 @@
 #include <ctype.h>
 #include <unistd.h>
 #include <limits.h>
+#include <signal.h>
+#include <string>
 
 #include "methods.h"
 #include "exec.h"
 #include "colors.h"
+#include "functions.h"
+
+//signal(SIGINT, funcs::signal_handler);
 
 int main(int argc, char *argv[])
 {
@@ -22,6 +27,7 @@ int main(int argc, char *argv[])
     std::cout<<shellx;
 
     while(t = methods::read_line()){
+        char cpy[150];
         std::cout<<shellx;
         pid_t c_pid = fork();
 
@@ -34,10 +40,22 @@ int main(int argc, char *argv[])
         }
         else {
             try{
+                strcpy(cpy , t); 
                 throw(exec::fork_exec(t)); 
             }
             catch(int code){
-                Color::CPRINT("red","Command not found");
+                char *p = strtok(t , " ");
+
+                if(strcmp(p , "cd") == 0){
+                    funcs::cd(p);
+                    break;
+                }else if(strcmp(p , "path") == 0){
+                    char *strx = funcs::path();
+                    Color::CPRINT("green", strx);
+                    break;
+                }
+                
+                Color::CPRINT("red", "err: command not found");
             }
 
             exit(EXIT_SUCCESS);
