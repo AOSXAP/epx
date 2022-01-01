@@ -8,6 +8,7 @@
 
 #include "methods.h"
 #include "exec.h"
+#include "colors.h"
 
 int main(int argc, char *argv[])
 {
@@ -36,7 +37,7 @@ int main(int argc, char *argv[])
                 throw(exec::fork_exec(t)); 
             }
             catch(int code){
-                std::cerr << "error command not found"<<"\n";
+                Color::CPRINT("red","Command not found");
             }
 
             exit(EXIT_SUCCESS);

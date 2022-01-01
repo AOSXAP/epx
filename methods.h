@@ -14,6 +14,7 @@
 #define GRN  "\x1B[32m"
 #define BLU  "\x1B[34m"
 
+#define BLUE(x) BLU x END
 
 char def_usr[] = "shell> ";
 
@@ -41,9 +42,10 @@ namespace methods{
     }
 
     char* color_names(char name[]){
-        char new_string[150];
-        strcpy(new_string , BLU); strcat(new_string , name);
+        char *new_string = (char *) malloc(150 * sizeof(char));
+        strcpy(new_string , RED); strcat(new_string , name);
         strcat(new_string, END);
+
         return new_string;
     }
 
@@ -51,12 +53,12 @@ namespace methods{
             char user_name[], char host_name[]
     ){
         full_user[0] = '['; 
-        //char *xd = color_names(user_name) , *yd = color_names(host_name);
-        //strcpy(user_name, xd);
-        //strcpy(host_name , yd);
+
+        //strcpy(user_name, color_names(user_name));
+        //strcpy(host_name ,  color_names(host_name));
 
         strcpy(full_user + 1 , user_name); 
-        strcat(full_user , "@"); strcat(full_user , host_name);
+        strcat(full_user , "@");  strcat(full_user , host_name);
         strcat(full_user , " epx]$ ");
     }
     
